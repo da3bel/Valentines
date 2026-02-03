@@ -103,6 +103,7 @@
           style="display:none; margin-top:30px; width:260px; border-radius:20px;"
       />
       <audio id="audio" src="valentine.mp3"></audio>
+      <button id="startAudio" style="display:none;">Start Audio</button>
 
     </div>
 
@@ -176,22 +177,19 @@
   })();
 });
 window.addEventListener("DOMContentLoaded", () => {
+  const startBtn = document.getElementById("startAudio");
   const audio = document.getElementById("audio");
 
-  // Essayer de jouer automatiquement
-  const playPromise = audio.play();
+  startBtn.addEventListener("click", () => {
+    audio.play();
+  });
 
-  // Certains navigateurs bloquent autoplay sans interaction
-  if (playPromise !== undefined) {
-    playPromise
-      .then(() => {
-        console.log("Audio démarré automatiquement");
-      })
-      .catch((error) => {
-        console.log("Autoplay bloqué, l'utilisateur doit interagir pour jouer le son.");
-      });
-  }
+  // Optionnel : demander à l’utilisateur de cliquer sur le body
+  document.body.addEventListener("click", () => {
+    audio.play();
+  }, { once: true });
 });
+
 
     </script>
   </body>
