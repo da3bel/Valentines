@@ -175,6 +175,23 @@
     if (Date.now() < end) requestAnimationFrame(frame);
   })();
 });
+window.addEventListener("DOMContentLoaded", () => {
+  const audio = document.getElementById("audio");
+
+  // Essayer de jouer automatiquement
+  const playPromise = audio.play();
+
+  // Certains navigateurs bloquent autoplay sans interaction
+  if (playPromise !== undefined) {
+    playPromise
+      .then(() => {
+        console.log("Audio démarré automatiquement");
+      })
+      .catch((error) => {
+        console.log("Autoplay bloqué, l'utilisateur doit interagir pour jouer le son.");
+      });
+  }
+});
 
     </script>
   </body>
